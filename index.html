@@ -1432,10 +1432,20 @@ tailwind.config = {
         </ul>
         <div class="border-t border-white/10 pt-5">
           <p class="text-white/40 text-[10px] uppercase tracking-[0.2em] font-semibold mb-2">Stay updated</p>
-          <form class="flex gap-2" onsubmit="event.preventDefault()">
-            <input type="email" placeholder="your@email.com" class="flex-1 bg-white/5 text-white placeholder-white/30 text-sm px-4 py-2.5 rounded-full border border-white/10 focus:outline-none focus:border-seaglass">
-            <button class="bg-seaglass hover:bg-seaglass-light text-white text-xs font-bold px-5 py-2.5 rounded-full transition-colors" aria-label="Subscribe">→</button>
+          <form id="signup-form" class="flex gap-2">
+            <input id="signup-email" type="email" required placeholder="your@email.com" aria-label="Your email address" class="flex-1 bg-white/5 text-white placeholder-white/30 text-sm px-4 py-2.5 rounded-full border border-white/10 focus:outline-none focus:border-seaglass">
+            <button type="submit" class="bg-seaglass hover:bg-seaglass-light text-white text-xs font-bold px-5 py-2.5 rounded-full transition-colors" aria-label="Subscribe">→</button>
           </form>
+          <p id="signup-note" class="hidden text-white/60 text-xs mt-3 leading-relaxed">Your email app should now open with a message to us. Just press send and we'll add you to our updates.</p>
+          <script>
+            document.getElementById('signup-form').addEventListener('submit', function (e) {
+              e.preventDefault();
+              var email = document.getElementById('signup-email').value.trim();
+              var body = 'Please add me to the Mind Thrive Wellbeing email updates.\n\nMy email address: ' + email;
+              window.location.href = 'mailto:hello@mindthrivewellbeing.com?subject=' + encodeURIComponent('Email updates sign-up') + '&body=' + encodeURIComponent(body);
+              document.getElementById('signup-note').classList.remove('hidden');
+            });
+          </script>
         </div>
       </div>
     </div>
